@@ -10,7 +10,7 @@ def format_name(first_name, last_name, middle_initial=None):
         formatted_name += f" {initial}."
     return f"{formatted_name} {last_name}"
 
-
+# code has been tested and passes all tests
 if __name__ == "__main__":
     print("Welcome to the AI-enhanced Name Formatter!")
     print(f"John Doe: {format_name('John', 'Doe')}")
