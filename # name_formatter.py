@@ -18,7 +18,7 @@ def format_name(first_name, last_name, middle_initial=None):
     Returns:
         str: The formatted name string.
     """
-    name_parts = [first_name]
+    name_parts = [first_name.strip()] if first_name and first_name.strip() else [] # Initialize with stripped first_name if valid
 
     # Process middle initial if provided
     if middle_initial is not None:  # Ensure a middle initial was actually given
@@ -28,7 +28,9 @@ def format_name(first_name, last_name, middle_initial=None):
             processed_initial = cleaned_middle_initial[0].upper() + "."
             name_parts.append(processed_initial)
 
-    name_parts.append(last_name)
+    # Add stripped last_name if valid
+    if last_name and last_name.strip():
+        name_parts.append(last_name.strip())
 
     return " ".join(name_parts)
 
