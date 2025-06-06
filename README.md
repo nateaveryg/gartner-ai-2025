@@ -1,10 +1,17 @@
 # Name Formatter Utility
 
-This project provides a simple Python utility to format names. It can handle names with or without middle initials, ensuring consistent formatting.
+This project provides a simple Python utility and a web interface to format names. It can handle names with or without middle initials, ensuring consistent formatting.
 
-## `format_name` Function
+## Project Structure
 
-This is the core function of the utility.
+The project is organized as follows:
+
+*   **Root Directory**: Contains the Python backend API (`api.py`), the core name formatting logic (`# name_formatter.py`), and their respective tests (`test_api.py`, `test_name_formatter.py`).
+*   **`frontend/` Directory**: Contains the Next.js/React frontend application.
+
+## `format_name` Function (Core Logic)
+
+This is the core function of the utility, found in `# name_formatter.py`.
 
 **Purpose:** Takes a person's first name, last name, and an optional middle initial, and returns a formatted name string.
 
@@ -20,53 +27,63 @@ This is the core function of the utility.
 
 *   (str): A string containing the formatted name (e.g., "First M. Last" or "First Last").
 
-**Examples:**
+## Running the Application
 
-```python
-from name_formatter import format_name
+### Backend API (Python/Flask)
 
-# Example without a middle initial
-name1 = format_name("John", "Doe")
-print(name1)  # Output: John Doe
+The backend is a Flask application serving the name formatting logic.
 
-# Example with a middle initial
-name2 = format_name("Jane", "Smith", "M")
-print(name2)  # Output: Jane M. Smith
-
-# Example with a lowercase middle initial and extra spaces
-name3 = format_name("Peter", "Jones", "  p  ")
-print(name3)  # Output: Peter P. Jones
-
-# Example with a middle initial already having a period
-name4 = format_name("Sarah", "Davis", "Q.")
-print(name4)  # Output: Sarah Q. Davis
-```
-
-*Note: The actual filename for importing is `# name_formatter.py` due to a '#' in its name. So the import statement should be `from \`# name_formatter\` import format_name` if you are running it directly. However, when used as a module, Python's import system might handle it differently or it might be advisable to rename the file for broader compatibility.*
-## How to Use
-
-1.  **Import the function:**
-
-    ```python
-    from \`# name_formatter\` import format_name
+1.  **Navigate to the project root directory.**
+2.  **Install dependencies:**
+    ```bash
+    pip install Flask
     ```
-    *(Please note the filename `# name_formatter.py`. If you encounter issues with the import due to the '#' character, consider renaming the file to `name_formatter.py` and adjusting the import statement accordingly: `from name_formatter import format_name`)*
-
-2.  **Call the function:**
-
-    ```python
-    full_name = format_name("YourFirstName", "YourLastName", "Y")
-    print(full_name)
-
-    full_name_no_middle = format_name("AnotherFirstName", "AnotherLastName")
-    print(full_name_no_middle)
+3.  **Run the API server:**
+    ```bash
+    python api.py
     ```
+    The API will be available at `http://localhost:5000`. The primary endpoint is `/api/format_name`.
+
+### Frontend (Next.js/React)
+
+The frontend is a Next.js/React application providing a user interface to interact with the API.
+
+1.  **Navigate to the `frontend` directory:**
+    ```bash
+    cd frontend
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+    *(If you encounter issues, ensure you have Node.js and npm installed.)*
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The frontend application will be available at `http://localhost:3000`.
+
 ## Running Tests
 
-This project includes a suite of unit tests to ensure the `format_name` function behaves as expected. The tests are located in the `test_name_formatter.py` file.
+### Core Logic Tests
 
-To run the tests, navigate to the project's root directory in your terminal and execute the following command:
+Unit tests for the `format_name` function are in `test_name_formatter.py`.
 
-```bash
-python -m unittest test_name_formatter.py
-```
+1.  **Navigate to the project root directory.**
+2.  **Run the tests:**
+    ```bash
+    python -m unittest test_name_formatter.py
+    ```
+
+### API Tests
+
+Integration tests for the API endpoints are in `test_api.py`. These tests require the Flask API server to be running.
+
+1.  **Ensure the Backend API is running** (see "Backend API (Python/Flask)" section above).
+2.  **Navigate to the project root directory.**
+3.  **Run the API tests:**
+    ```bash
+    python -m unittest test_api.py
+    ```
+
+*Note on `# name_formatter.py`: The core logic file `# name_formatter.py` has a leading '#' in its name. `api.py` uses `importlib` to load it. The tests in `test_name_formatter.py` also use `importlib` or assume direct execution context where this might be less problematic.*
